@@ -82,3 +82,33 @@ sql_writeTable <- function(conn,table_name,r_object,append=FALSE){
   return(res)
 
 }
+
+
+#' 分页查询
+#'
+#' @param sql_str 基本语句
+#' @param page_by 分页字段
+#' @param from 开始
+#' @param to  结束
+#' @param conn  连接信息
+#'
+#' @return 返回值
+#' @import RJDBC
+#' @export
+#'
+#' @examples()
+#' hana_select_paging
+sql_select_paging <- function(conn,
+                               sql_str,
+                               page_by='fid',
+                               from=1,
+                               to =10000
+) {
+  sql_str2 <- paste0(sql_str," where ",page_by," >= ",from,"  and ",page_by," <=  ",to)
+  print(sql_str2)
+  res <- dbGetQuery(var_hana_conn,sql_str2)
+  return(res)
+
+
+
+}
