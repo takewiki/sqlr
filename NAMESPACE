@@ -3,6 +3,7 @@
 export(sql_conn_common)
 export(sql_select)
 export(sql_select_paging)
+export(sql_tableCount)
 export(sql_update)
 export(sql_writeTable)
 import(RJDBC)
