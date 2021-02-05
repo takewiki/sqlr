@@ -106,9 +106,32 @@ sql_select_paging <- function(conn,
 ) {
   sql_str2 <- paste0(sql_str," where ",page_by," >= ",from,"  and ",page_by," <=  ",to)
   print(sql_str2)
-  res <- dbGetQuery(var_hana_conn,sql_str2)
+  res <- dbGetQuery(conn,sql_str2)
   return(res)
 
 
+
+}
+
+
+
+
+#' 返回表的行数
+#'
+#' @param table_name  表名
+#' @param conn  连接
+#'
+#' @return 返回值
+#' @import RJDBC
+#' @export
+#'
+#' @examples
+#' hana_tableCount()
+sql_tableCount <- function(conn,table_name) {
+
+  sql <- paste0("select  count(1)  as FCount   from  ",table_name)
+  r<- sql_select(conn,sql_str = sql)
+  res <- r$FCount
+  return(res)
 
 }
