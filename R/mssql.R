@@ -104,7 +104,12 @@ sql_select_paging <- function(conn,
                                from=1,
                                to =10000
 ) {
+
+  from <- as.character(from)
+  to <- as.character(to)
+
   sql_str2 <- paste0(sql_str," where ",page_by," >= ",from,"  and ",page_by," <=  ",to)
+
   print(sql_str2)
   res <- dbGetQuery(conn,sql_str2)
   return(res)
